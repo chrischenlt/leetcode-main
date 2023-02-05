@@ -70,41 +70,30 @@ func min(x, y int) int {
 }
 
 func longestPalindrome1(s string) string {
-
-	if s == "" {
-		return ""
+	if len(s) == 1 {
+		return s
 	}
 
-	start, end := 0, 0
-
+	var res string
 	for i := 0; i < len(s); i++ {
-		curLen := end - start
-		// add
-		left, right := a(s, i, i, curLen)
-		if curLen < right-left {
-			start = left
-			end = right
+		s2 := a(s, i, i)
+		if len(s2) > len(res) {
+			res = s2
 		}
-
-		// even
-		left, right = a(s, i, i+1, curLen)
-		if curLen < right-left {
-			start = left
-			end = right
+		s3 := a(s, i, i+1)
+		if len(s3) > len(res) {
+			res = s3
 		}
 	}
-	return s[start : end+1]
+	return res
 }
 
-func a(s string, left, right, curLength int) (start, end int) {
+func a(s string, left, right int) string {
+	var res string
 	for left >= 0 && right < len(s) && s[left] == s[right] {
-		if curLength < right-left {
-			start = left
-			end = right
-		}
+		res = s[left : right+1]
 		left--
 		right++
-		continue
 	}
-	return
+	return res
 }
