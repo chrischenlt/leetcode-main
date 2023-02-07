@@ -6,7 +6,6 @@ func main() {
 	fmt.Println(maxArea([]int{1, 8, 6, 2, 5, 4, 8, 3, 7}))
 }
 
-//
 func maxArea(height []int) int {
 	left, right := 0, len(height)-1
 	max := 0
