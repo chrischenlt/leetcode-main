@@ -1,5 +1,12 @@
 package main
 
+import "sync"
+
+func main() {
+	mutex := sync.RWMutex{}
+	mutex.RLock()
+}
+
 type ListNode struct {
 	Val  int
 	Next *ListNode
