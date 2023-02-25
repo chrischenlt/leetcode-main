@@ -6,6 +6,7 @@ func main() {
 
 	fmt.Println(+1)
 }
+
 func longestPalindrome(s string) string {
 	if len(s) == 1 {
 		return s
