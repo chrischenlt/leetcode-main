@@ -26,11 +26,11 @@ func threeSum(nums []int) [][]int {
 		if i > 0 && nums[i] == nums[i-1] {
 			continue
 		}
-		target, left, right := -nums[i], i+1, len(nums)-1
+		left, right := i+1, len(nums)-1
 		for left < right {
-			sum := nums[left] + nums[right]
-			if sum == target {
-				res = append(res, []int{nums[left], nums[right], -target})
+			sum := nums[left] + nums[right] + nums[i]
+			if sum == 0 {
+				res = append(res, []int{nums[left], nums[right], nums[i]})
 				left++
 				right--
 				for left < right && nums[left] == nums[left-1] {
@@ -39,7 +39,7 @@ func threeSum(nums []int) [][]int {
 				for left < right && nums[right] == nums[right+1] {
 					right--
 				}
-			} else if sum > target {
+			} else if sum > 0 {
 				right--
 			} else {
 				left++

@@ -18,8 +18,33 @@ package main
 //    }
 //}
 
-// timeout
 func largestRectangleArea(heights []int) int {
+	stack := []int{-1}
+	var maxarea int
+	for i := 0; i < len(heights); i++ {
+		for stack[len(stack)-1] != -1 && heights[i] <= heights[stack[len(stack)-1]] {
+			maxarea = max(maxarea, (i-stack[len(stack)-2]-1)*heights[stack[len(stack)-1]])
+			stack = stack[:len(stack)-1]
+		}
+		stack = append(stack, i)
+	}
+
+	for stack[len(stack)-1] != -1 {
+		maxarea = max(maxarea, (len(heights)-1-stack[len(stack)-2])*heights[stack[len(stack)-1]])
+		stack = stack[:len(stack)-1]
+	}
+	return maxarea
+}
+
+func max(i, j int) int {
+	if i >= j {
+		return i
+	}
+	return j
+}
+
+// timeout
+func largestRectangleArea11(heights []int) int {
 	if len(heights) == 0 {
 		return 0
 	}
