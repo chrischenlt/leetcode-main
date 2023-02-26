@@ -7,6 +7,19 @@ type TreeNode struct {
 }
 
 func constructMaximumBinaryTree(nums []int) *TreeNode {
+	if len(nums) == 0 {
+		return nil
+	}
 
-	return nil
+	var index, maxV int
+	for i := 0; i < len(nums); i++ {
+		if nums[i] > maxV {
+			maxV = nums[i]
+			index = i
+		}
+	}
+	root := &TreeNode{Val: maxV}
+	root.Left = constructMaximumBinaryTree(nums[:index])
+	root.Right = constructMaximumBinaryTree(nums[index+1:])
+	return root
 }
